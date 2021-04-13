@@ -100,7 +100,7 @@ hold_current: 0.300
 sense_resistor: 0.11
 stealthchop_threshold: 0
 # driver_SGTHRS ist die Empfindlichkeit, mit der erkannt wird, ob der Motor ein Hindernis angefahren hat.
-# Höhere Werte = höhere Empfindlichkeit
+# HÃ¶here Werte = hÃ¶here Empfindlichkeit
 # Max = 255
 driver_SGTHRS: 130
 
@@ -125,7 +125,7 @@ hold_current: 0.300
 sense_resistor: 0.11
 stealthchop_threshold: 0
 # driver_SGTHRS ist die Empfindlichkeit, mit der erkannt wird, ob der Motor ein Hindernis angefahren hat.
-# Höhere Werte = höhere Empfindlichkeit
+# HÃ¶here Werte = hÃ¶here Empfindlichkeit
 # Max = 255
 driver_SGTHRS: 140
 
