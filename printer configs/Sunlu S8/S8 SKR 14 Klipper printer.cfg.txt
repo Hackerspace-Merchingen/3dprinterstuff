@@ -1,7 +1,33 @@
-# Mainsail specific config entries
+#====================================================================================================================================================#
+#                                                                                                                                        printer.cfg #
+#----------------------------------------------------------------------------------------------------------------------------------------------------#
+# printer.cfg                                                                                                                                        #
+# Klipper config file for SKR 1.4 Turbo | Sunlu S8 Printer | Orbiter Extruder | bltouch clone                                                        #
+# Dirk Huffer mail@dirkhuffer.com                                                                                                                    #
+# created 2021-03-02                                                                                                                                 #
+#----------------------------------------------------------------------------------------------------------------------------------------------------#
+#                                                                                                                                                    #
+#----------------------------------------------------------------------------------------------------------------------------------------------------#
 
 [virtual_sdcard]
 path: ~/gcode_files
+
+[mcu rpi]
+serial: /tmp/klipper_host_mcu
+
+[adxl345]
+cs_pin: rpi:None
+spi_bus: spidev1.0
+# spi_bus: spi2b
+#cs_pin: PC14
+#spi_software_mosi_pin: PG15
+#spi_software_miso_pin: PB6
+#spi_software_sclk_pin: PB3
+
+[resonance_tester]
+accel_chip: adxl345
+probe_points:
+    100,100,20  # an example
 
 [display_status]
 
@@ -57,7 +83,7 @@ pin_up_touch_mode_reports_triggered: True
 #flavor: genuine_smart_3.1
 x_offset: -55
 y_offset: -20
-z_offset: 1.0
+#z_offset: 1.0
 speed: 10.00
 #samples:
 #sample_retract_dist:
@@ -69,8 +95,8 @@ speed: 10.00
 speed: 100
 horizontal_move_z: 15
 mesh_min: 30,35
-mesh_max: 205,215
-probe_count: 3,3
+mesh_max: 215,285
+probe_count: 5,5
 fade_start: 1.0
 mesh_pps: 2,2
 
@@ -133,9 +159,14 @@ driver_SGTHRS: 140
 step_pin: P0.22
 dir_pin: !P2.11
 enable_pin: !P0.21
-microsteps: 256
+microsteps: 16
 rotation_distance: 8
 endstop_pin: probe:z_virtual_endstop
+                   #--------------------------------------------------------
+                   #  disable sanity check to enable bltouch functionality
+                   #  doing so by setting position_min to a negative value
+                   #--------------------------------------------------------
+position_min: -15
 position_max: 300
 homing_speed: 20
 homing_retract_dist: 0
@@ -143,8 +174,8 @@ homing_retract_dist: 0
 [tmc2209 stepper_z]
 uart_pin: P1.8
 diag_pin: ^P1.27
-run_current: 0.500
-hold_current: 0.200
+run_current: 0.175
+hold_current: 0.050
 stealthchop_threshold: 999999
 driver_SGTHRS: 0
 
@@ -152,14 +183,14 @@ driver_SGTHRS: 0
 step_pin: P2.13
 dir_pin: !P0.11
 enable_pin: !P2.12
-microsteps: 256
+microsteps: 16
 rotation_distance: 8
 
 [tmc2209 stepper_z1]
 uart_pin: P1.4
 diag_pin: ^P1.27
-run_current: 0.500
-hold_current: 0.200
+run_current: 0.175
+hold_current: 0.050
 stealthchop_threshold: 999999
 driver_SGTHRS: 0
 
@@ -168,8 +199,8 @@ step_pin: P1.15
 dir_pin: P1.14
 enable_pin: !P1.16
 microsteps: 16
-rotation_distance: 7.710
-nozzle_diameter: 0.400
+rotation_distance: 4.80
+nozzle_diameter: 0.600
 filament_diameter: 1.750
 heater_pin: P2.7
 sensor_type: B57560G104F
@@ -181,17 +212,17 @@ control: pid
 [tmc2209 extruder]
 uart_pin: P1.1
 #microsteps: 16
-run_current: 0.500
+run_current: 0.350
 hold_current: 0.010
 stealthchop_threshold: 0
 
 [thermistor B57560G104F]
-temperature1: 27.9
-resistance1: 97058.730
-temperature2: 142
-resistance2: 1625.407
-temperature3: 211
-resistance3: 312.353
+temperature1: 30.8
+resistance1: 85500.000
+temperature2: 155
+resistance2: 1319.234
+temperature3: 207
+resistance3: 393.856
 
 [heater_bed]
 heater_pin: P2.5
@@ -209,8 +240,8 @@ serial: /dev/serial/by-id/usb-Klipper_lpc1769_1460FF08C09869AF4EB3405EC22000F5-i
 
 [printer]
 kinematics: cartesian
-max_velocity: 400
-max_accel: 500
+max_velocity: 1000
+max_accel: 2000
 max_z_velocity: 10
 max_z_accel: 100
 
@@ -226,17 +257,51 @@ click_pin: ^!P1.20
 [output_pin beeper] 
 pin: P0.28
 
+[gcode_macro load_filament]
+gcode:
+ G91
+ G1 E50 F5
+ G90
+ M400
+ M117 Load Complete!
+ 
+[gcode_macro unload_filament]
+gcode:
+ G91
+ G1 E-50
+ G90
+ M400
+ M117 UnLoad Complete!
+
 #*# <---------------------- SAVE_CONFIG ---------------------->
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [extruder]
-#*# control = pid
 #*# pid_kp = 19.638
 #*# pid_ki = 0.779
 #*# pid_kd = 123.717
 #*#
 #*# [heater_bed]
-#*# control = pid
 #*# pid_kp = 71.134
 #*# pid_ki = 1.070
 #*# pid_kd = 1181.720
+#*#
+#*# [bltouch]
+#*# z_offset = 4.000
+#*#
+#*# [bed_mesh default]
+#*# version = 1
+#*# points =
+#*# 	  -0.119531, -0.046094, 0.198281
+#*# 	  -0.023906, 0.109062, 0.374375
+#*# 	  0.193594, 0.328281, 0.643594
+#*# tension = 0.2
+#*# min_x = 30.0
+#*# algo = lagrange
+#*# y_count = 3
+#*# mesh_y_pps = 2
+#*# min_y = 35.0
+#*# x_count = 3
+#*# max_y = 215.0
+#*# mesh_x_pps = 2
+#*# max_x = 205.0
