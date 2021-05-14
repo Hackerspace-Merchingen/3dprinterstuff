@@ -12,3 +12,9 @@ So here's a new approach to the problem: We add another motor, which also has on
 ## Prototype build
 
 ![IMG_20210514_144850](https://user-images.githubusercontent.com/3326711/118272950-a1234e00-b4c3-11eb-8c8a-8284dd5ae31d.jpg)
+
+## The principle
+
+Our new filament feeder pushes the filament through a channel that sits above a microswitch. A microcontroller controls the motor and runs it whenever the switch is pressed. The switch has to be positioned so that when filament is pulled, the extruder pulls on the filament in the appropriate direction, triggering the switch. The filament feeder must push the filament into the free space above the extruder.
+
+![IMG_20210514_144821](https://user-images.githubusercontent.com/3326711/118274139-0d528180-b4c5-11eb-81d7-14872bfa2a03.jpg)
