@@ -9,3 +9,6 @@ It would be much better if the extruder had only one task. It is hard enough to 
 
 So here's a new approach to the problem: We add another motor, which also has only one task: To unwind the filament from the roll and provide it in such a way that the actual extruder can access the filament without force.
 
+## Prototype build
+
+![IMG_20210514_144850](https://user-images.githubusercontent.com/3326711/118272950-a1234e00-b4c3-11eb-8c8a-8284dd5ae31d.jpg)
