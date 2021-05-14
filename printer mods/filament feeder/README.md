@@ -11,4 +11,4 @@ So here's a new approach to the problem: We add another motor, which also has on
 
 ## Prototype build
 
-![IMG_20210514_144850](https://user-images.githubusercontent.com/3326711/118272950-a1234e00-b4c3-11eb-8c8a-8284dd5ae31d.jpg | width=100)
+![IMG_20210514_144850](https://user-images.githubusercontent.com/3326711/118272950-a1234e00-b4c3-11eb-8c8a-8284dd5ae31d.jpg){:class="img-responsive"}
